@@ -1,27 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace i4o2
-{
-    public class Index<T> : IEnumerable<T>
+{    
+    public interface IIndex<TChild> : ICollection<TChild>
     {
-        private readonly IList<T> _internalList;
-        
-        public Index(IEnumerable<T> enumerableToIndex)
-        {
-            _internalList = new List<T>(enumerableToIndex);
-        }
-
-        public IEnumerator<T> GetEnumerator()
-        {
-            return _internalList.GetEnumerator();
-        }
-
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
+        string PropertyName { get; }
+        IEnumerable<TChild> WhereThroughIndex(Expression<Func<TChild, bool>> whereClause);
     }
 }
