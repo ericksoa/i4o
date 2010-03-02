@@ -11,5 +11,6 @@ namespace i4o2
     {
         string PropertyName { get; }
         IEnumerable<TChild> WhereThroughIndex(Expression<Func<TChild, bool>> whereClause);
+        void Reset(TChild changedObject);
     }
 }

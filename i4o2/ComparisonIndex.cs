@@ -110,6 +110,12 @@ namespace i4o2
             }
         }
 
+        public void Reset(TChild changedObject)
+        {
+            Remove(changedObject);
+            Add(changedObject);
+        }
+
         private IEnumerable<TChild> IsEqualTo(TProperty valueToCheck)
         {
             if (_index.Contains(valueToCheck))

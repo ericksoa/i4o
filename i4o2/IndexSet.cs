@@ -19,7 +19,7 @@ namespace i4o2
             SetupIndices(source);
         }
 
-        private void SetupIndices(IEnumerable<T> source)
+        protected void SetupIndices(IEnumerable<T> source)
         {
             IndexSpecification.IndexedProperties.ToList().ForEach( 
                 propName =>
@@ -41,17 +41,41 @@ namespace i4o2
 
         internal IEnumerable<T> WhereUsingIndex(Expression<Func<T,bool>> predicate)
         {
-            if (!(predicate.Body is BinaryExpression)) throw new NotSupportedException();
-            var binaryBody = (BinaryExpression) predicate.Body;
-            if (binaryBody.NodeType == ExpressionType.Equal)
-            {
-                if (!(binaryBody.Left is MemberExpression)) throw new NotSupportedException();
-                var memberLeft = (MemberExpression) binaryBody.Left;
-                if (IndexSpecification.IndexedProperties.Contains(memberLeft.Member.Name))
-                    return IndexDictionary[memberLeft.Member.Name].WhereThroughIndex(predicate);
-                return IndexDictionary.First().Value.Where(predicate.Compile());
-            }
-            throw new NotSupportedException();
+            if (
+                BodyIsBinary(predicate) && 
+                BodyTypeIsEqual(predicate) &&
+                LeftSideIsMemberExpression(predicate) &&
+                LeftSideMemberIsIndexed(predicate)
+               )
+               return IndexDictionary[LeftSide(predicate).Member.Name].WhereThroughIndex(predicate);
+            return IndexDictionary.First().Value.Where(predicate.Compile());
+        }
+
+        private static MemberExpression LeftSide(Expression<Func<T, bool>> predicate)
+        {
+            return ((MemberExpression)((BinaryExpression)predicate.Body).Left);
+        }
+
+        private bool LeftSideMemberIsIndexed(Expression<Func<T, bool>> predicate)
+        {
+            return (IndexSpecification.IndexedProperties.Contains(
+                ((MemberExpression)((BinaryExpression)predicate.Body).Left
+                ).Member.Name));
+        }
+
+        private static bool LeftSideIsMemberExpression(Expression<Func<T, bool>> predicate)
+        {
+            return ((((BinaryExpression)predicate.Body)).Left is MemberExpression);
+        }
+
+        private static bool BodyTypeIsEqual(Expression<Func<T, bool>> predicate)
+        {
+            return (predicate.Body.NodeType == ExpressionType.Equal);
+        }
+
+        private static bool BodyIsBinary(Expression<Func<T, bool>> predicate)
+        {
+            return (predicate.Body is BinaryExpression);
         }
     }
 }

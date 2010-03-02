@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Drawing;
 using NUnit.Framework;
 
@@ -44,24 +42,24 @@ namespace i4o2.Tests
             var someObservableObject = new ObservableObject {SomeMutable = 6};
             var someCollection = new ObservableCollection<ObservableObject>(
                 new List<ObservableObject>{ someObservableObject });
-            var indexSpec = new IndexSpecification<ObservableObject>();
-            indexSpec.Add(child => child.SomeMutable);
-            var someIndex = new ObservingIndexSet<ObservableObject>(someCollection, indexSpec);
+            var indexSpec = IndexSpecification<ObservableObject>.Build()
+                .With(child => child.SomeMutable);
+            var someIndex = IndexBuilder.BuildIndicesFor(someCollection, indexSpec);
             someObservableObject.SomeMutable = 3;
             Assert.AreEqual( (from v in someIndex where v.SomeMutable == 3 select v).Count(), 1 );
         }
 
         [Test]
-        public void InvalidLookupThrowsInvalidLookupException()
+        public void IndexRecognizesItemAddedToSourceCollection()
         {
             var someObservableObject = new ObservableObject { SomeMutable = 6 };
             var someCollection = new ObservableCollection<ObservableObject>(
                 new List<ObservableObject> { someObservableObject });
-            var indexSpec = new IndexSpecification<ObservableObject>();
-            indexSpec.Add(child => child.SomeMutable);
-            var someIndex = new ObservingIndexSet<ObservableObject>(someCollection, indexSpec);
-            Assert.Throws<IndexLookupFailedException>(
-                () => { (from v in someIndex where v.SomeMutable == 56 select v).First(); });
+            var indexSpec = IndexSpecification<ObservableObject>.Build()
+                .With(child => child.SomeMutable);
+            var someIndex = IndexBuilder.BuildIndicesFor(someCollection, indexSpec);
+            someCollection.Add( new ObservableObject { SomeMutable = 3 });
+            Assert.AreEqual((from v in someIndex where v.SomeMutable == 3 select v).Count(), 1);
         }
 
         public class SimpleClass
@@ -78,8 +76,8 @@ namespace i4o2.Tests
         public void EquatableIndexLookupResolves()
         {
             SimpleClass[] someItems = {
-                                new SimpleClass() {Name = "Jason", Age = 25},
-                                new SimpleClass() {Name = "Aaron", Age = 37}
+                                new SimpleClass {Name = "Jason", Age = 25},
+                                new SimpleClass {Name = "Aaron", Age = 37}
                             };
             var indexOnSomeItems = 
                 new EqualityIndex<SimpleClass>(
@@ -93,8 +91,8 @@ namespace i4o2.Tests
         public void EquatableIndexLookupWithComplexRightConditionResolves()
         {
             SimpleClass[] someItems = {
-                                new SimpleClass() {Name = "Jason", Age = 25},
-                                new SimpleClass() {Name = "Aaron", Age = 37}
+                                new SimpleClass {Name = "Jason", Age = 25},
+                                new SimpleClass {Name = "Aaron", Age = 37}
                             };
             var indexOnSomeItems =
                 new EqualityIndex<SimpleClass>(
@@ -108,10 +106,10 @@ namespace i4o2.Tests
         public void ComparableIndexLookupWithLessThan()
         {
             SimpleClass[] someItems = {
-                                new SimpleClass() {Name = "Jason", Age = 25},
-                                new SimpleClass() {Name = "Aaron", Age = 37},
-                                new SimpleClass() {Name = "Erin", Age=34},
-                                new SimpleClass() {Name = "Adriana", Age=13}, 
+                                new SimpleClass {Name = "Jason", Age = 25},
+                                new SimpleClass {Name = "Aaron", Age = 37},
+                                new SimpleClass {Name = "Erin", Age=34},
+                                new SimpleClass {Name = "Adriana", Age=13}, 
                             };
             var indexOnSomeItems =
                 new ComparisonIndex<SimpleClass, int>(
@@ -125,27 +123,27 @@ namespace i4o2.Tests
         public void ComparableIndexLookupWithLessThanOrEqualTo()
         {
             SimpleClass[] someItems = {
-                                new SimpleClass() {Name = "Jason", Age = 25},
-                                new SimpleClass() {Name = "Aaron", Age = 37},
-                                new SimpleClass() {Name = "Erin", Age=34},
-                                new SimpleClass() {Name = "Adriana", Age=13}, 
+                                new SimpleClass {Name = "Jason", Age = 25},
+                                new SimpleClass {Name = "Aaron", Age = 37},
+                                new SimpleClass {Name = "Erin", Age=34},
+                                new SimpleClass {Name = "Adriana", Age=13}, 
                             };
             var indexOnSomeItems =
                 new ComparisonIndex<SimpleClass, int>(
                     someItems,
                     typeof(SimpleClass).GetProperty("Age"));
-            var youngerThan34or34 = indexOnSomeItems.WhereThroughIndex(item => item.Age <= 34);
-            Assert.AreEqual(3, youngerThan34or34.Count());
+            var youngerThan34Or34 = indexOnSomeItems.WhereThroughIndex(item => item.Age <= 34);
+            Assert.AreEqual(3, youngerThan34Or34.Count());
         }
 
         [Test]
         public void ComparableIndexLookupWithGreaterThan()
         {
             SimpleClass[] someItems = {
-                                new SimpleClass() {Name = "Jason", Age = 25},
-                                new SimpleClass() {Name = "Aaron", Age = 37},
-                                new SimpleClass() {Name = "Erin", Age=34},
-                                new SimpleClass() {Name = "Adriana", Age=13}, 
+                                new SimpleClass {Name = "Jason", Age = 25},
+                                new SimpleClass {Name = "Aaron", Age = 37},
+                                new SimpleClass {Name = "Erin", Age=34},
+                                new SimpleClass {Name = "Adriana", Age=13}, 
                             };
             var indexOnSomeItems =
                 new ComparisonIndex<SimpleClass, int>(
@@ -159,30 +157,30 @@ namespace i4o2.Tests
         public void ComparableIndexLookupWithGreaterThanOrEqualTo()
         {
             SimpleClass[] someItems = {
-                                new SimpleClass() {Name = "Jason", Age = 25},
-                                new SimpleClass() {Name = "Aaron", Age = 37},
-                                new SimpleClass() {Name = "Erin", Age=34},
-                                new SimpleClass() {Name = "Adriana", Age=13}, 
+                                new SimpleClass {Name = "Jason", Age = 25},
+                                new SimpleClass {Name = "Aaron", Age = 37},
+                                new SimpleClass {Name = "Erin", Age=34},
+                                new SimpleClass {Name = "Adriana", Age=13}, 
                             };
             var indexOnSomeItems =
                 new ComparisonIndex<SimpleClass, int>(
                     someItems,
                     typeof(SimpleClass).GetProperty("Age"));
-            var olderThan34or34 = indexOnSomeItems.WhereThroughIndex(item => item.Age >= 34);
-            Assert.AreEqual(2, olderThan34or34.Count());
+            var olderThan34Or34 = indexOnSomeItems.WhereThroughIndex(item => item.Age >= 34);
+            Assert.AreEqual(2, olderThan34Or34.Count());
         }
 
         [Test]
         public void BuilderReturnsComparisonIndexForComparable()
         {
             SimpleClass[] someItems = {
-                                new SimpleClass() {Name = "Jason", Age = 25},
-                                new SimpleClass() {Name = "Aaron", Age = 37},
-                                new SimpleClass() {Name = "Erin", Age=34},
-                                new SimpleClass() {Name = "Adriana", Age=13}, 
+                                new SimpleClass {Name = "Jason", Age = 25},
+                                new SimpleClass {Name = "Aaron", Age = 37},
+                                new SimpleClass {Name = "Erin", Age=34},
+                                new SimpleClass {Name = "Adriana", Age=13}, 
                             };
             var theRightIndex 
-                = IndexBuilder.GetIndexFor<SimpleClass>(
+                = IndexBuilder.GetIndexFor(
                     someItems, 
                     typeof (SimpleClass).GetProperty("Age")
                 );
@@ -193,13 +191,13 @@ namespace i4o2.Tests
         public void BuilderReturnsEqualityIndexForNotComparable()
         {
             SimpleClass[] someItems = {
-                                new SimpleClass() {Name = "Jason", Age = 25},
-                                new SimpleClass() {Name = "Aaron", Age = 37, FavoriteColor=Color.Green},
-                                new SimpleClass() {Name = "Erin", Age=34},
-                                new SimpleClass() {Name = "Adriana", Age=13}, 
+                                new SimpleClass {Name = "Jason", Age = 25},
+                                new SimpleClass {Name = "Aaron", Age = 37, FavoriteColor=Color.Green},
+                                new SimpleClass {Name = "Erin", Age=34},
+                                new SimpleClass {Name = "Adriana", Age=13}, 
                             };
             var theRightIndex
-                = IndexBuilder.GetIndexFor<SimpleClass>(
+                = IndexBuilder.GetIndexFor(
                     someItems,
                     typeof(SimpleClass).GetProperty("FavoriteColor")
                 );
@@ -210,20 +208,46 @@ namespace i4o2.Tests
         public void ComplexQuery()
         {
             SimpleClass[] someItems = {
-                                          new SimpleClass() {Name = "Jason", Age = 25},
-                                          new SimpleClass() {Name = "Aaron", Age = 37, FavoriteColor = Color.Green},
-                                          new SimpleClass() {Name = "Erin", Age = 34},
-                                          new SimpleClass() {Name = "Adriana", Age = 13},
+                                          new SimpleClass {Name = "Jason", Age = 25},
+                                          new SimpleClass {Name = "Aaron", Age = 37, FavoriteColor = Color.Green},
+                                          new SimpleClass {Name = "Erin", Age = 34},
+                                          new SimpleClass {Name = "Adriana", Age = 13},
                                       };
-            var indexSpec = new IndexSpecification<SimpleClass>();
-            indexSpec.Add(p => p.FavoriteColor);
-            indexSpec.Add(p => p.Age);
+            var indexSpec = IndexSpecification<SimpleClass>.Build()
+                .With(person => person.FavoriteColor)
+                .And(person => person.Age);
             var theIndexSet = new IndexSet<SimpleClass>(someItems, indexSpec);
             var twoResults = 
                 from item in theIndexSet 
                 where item.FavoriteColor == Color.Green || item.Age == 13 && item.Name == "Adriana"
                 select item;
             Assert.AreEqual(2, twoResults.Count());
+        }
+
+        [Test]
+        public void SuperComplexQuery()
+        {
+            SimpleClass[] someItems = {
+                                          new SimpleClass {Name = "Jason Jarett", Age = 25, FavoriteColor = Color.Aqua},
+                                          new SimpleClass {Name = "Aaron Erickson", Age = 37, FavoriteColor = Color.Green},
+                                          new SimpleClass {Name = "Erin Erickson", Age = 34, FavoriteColor = Color.Green},
+                                          new SimpleClass {Name = "Adriana Erickson", Age = 13, FavoriteColor = Color.Aqua},
+                                      };
+            var indexSpec = IndexSpecification<SimpleClass>.Build()
+                .With(person => person.FavoriteColor)
+                .And(person => person.Age)
+                .And(person => person.Name);
+            var theIndexSet = new IndexSet<SimpleClass>(someItems, indexSpec);
+            var oneResult =
+                from item in theIndexSet
+                where 
+                (
+                  (item.FavoriteColor == Color.Green && item.Age == 37) || 
+                  (item.Name == "Adriana Erickson" && item.Age == 13) ||
+                  (item.Name == "Jason Jarett" && item.Age == 25)
+                ) && item.Name == "Aaron Erickson"
+                select item;
+            Assert.AreEqual(1, oneResult.Count());
         }
     }
 }

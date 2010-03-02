@@ -96,5 +96,11 @@ namespace i4o2
             else
                 yield break;
         }
+
+        public void Reset(TChild changedObject)
+        {
+            Remove(changedObject);
+            Add(changedObject);
+        }
     }
 }

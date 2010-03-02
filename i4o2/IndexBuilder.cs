@@ -1,12 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Collections.ObjectModel;
 
 namespace i4o2
 {
     public static class IndexBuilder
     {
+        public static IndexSet<TChild> BuildIndicesFor<TChild>(
+            ObservableCollection<TChild> observableCollection,
+            IndexSpecification<TChild> specification) where TChild : INotifyPropertyChanged 
+        {
+            return new ObservingIndexSet<TChild>(observableCollection, specification);
+        }
+
+        public static IndexSet<TChild> BuildIndicesFor<TChild>(
+            IEnumerable<TChild> enumerable,
+            IndexSpecification<TChild> specification)
+        {
+            return new IndexSet<TChild>(enumerable,specification);
+        }
+
         public static IIndex<TChild> GetIndexFor<TChild>(
             IEnumerable<TChild> enumerable,
             PropertyInfo propertyInfo)
@@ -25,12 +41,12 @@ namespace i4o2
         {
             return (IIndex<TChild>) 
                    Activator.CreateInstance(
-                       Type.GetType("i4o2.ComparisonIndex`2").MakeGenericType(new Type[] {typeof (TChild), propertyInfo.PropertyType}),
+                       Type.GetType("i4o2.ComparisonIndex`2").MakeGenericType(new[] {typeof (TChild), propertyInfo.PropertyType}),
                        new object[] { enumerable, propertyInfo }
                        );
         }
 
-        public static bool Supports<T>(this Type type)
+        internal static bool Supports<T>(this Type type)
         {
             return type.GetInterfaces().Where(i => i == typeof (T)).Count() > 0;
         }

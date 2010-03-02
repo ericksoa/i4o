@@ -14,15 +14,25 @@ namespace i4o2
             IndexedProperties = new Collection<string>();
         }
 
-        public IndexSpecification<T> Add<TProperty>(Expression<Func<T, TProperty>> propertyExpressions)
+        public static IndexSpecification<T> Build()
         {
-            var value = propertyExpressions.GetMemberName();
+            return new IndexSpecification<T>();
+        }
+
+        public IndexSpecification<T> Add<TProperty>(Expression<Func<T, TProperty>> propertyExpression)
+        {
+            var value = propertyExpression.GetMemberName();
 
             // Should only add property once
             if (!IndexedProperties.Contains(value))
                 IndexedProperties.Add(value);
 
             return this;
+        }
+
+        public IndexSpecification<T> With<TProperty>(Expression<Func<T, TProperty>> propertyExpression)
+        {
+            return Add(propertyExpression);
         }
 
         public IndexSpecification<T> Remove<TProperty>(Expression<Func<T, TProperty>> propertyExpressions)
@@ -33,6 +43,10 @@ namespace i4o2
 
             return this;
         }
-    }
 
+        public IndexSpecification<T> And<TProperty>(Expression<Func<T, TProperty>> propertyExpression)
+        {
+            return Add(propertyExpression);
+        }
+    }
 }

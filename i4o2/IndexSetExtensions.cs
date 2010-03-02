@@ -30,7 +30,7 @@ namespace i4o2
                 case ExpressionType.Equal:
                     return indexSet.WhereUsingIndex(predicate);
                 default:
-                    throw new NotSupportedException();
+                    return Enumerable.Where(indexSet, predicate.Compile());
             }
         }
         
