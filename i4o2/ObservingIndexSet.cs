@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
+using i4o2.i4o;
 
 namespace i4o2
 {
@@ -30,12 +29,12 @@ namespace i4o2
 
         private void DetachAllChildren()
         {
-            _observableCollection.ToList().ForEach(DetachPropertyChanged);
+            _observableCollection.Each(DetachPropertyChanged);
         }
 
         private void AttachAllChildren()
         {
-            _observableCollection.ToList().ForEach(AttachPropertyChanged);
+            _observableCollection.Each(AttachPropertyChanged);
         }
 
         private void SetupEventHandlers()
@@ -74,7 +73,7 @@ namespace i4o2
 
         private void RemoveItems(IEnumerable oldItems)
         {
-            oldItems.Cast<T>().ToList().ForEach( item =>
+            oldItems.Cast<T>().Each( item =>
                 {
                     DetachPropertyChanged(item);
                     IndexDictionary.Values.ToList().ForEach(index =>
@@ -85,7 +84,7 @@ namespace i4o2
 
         private void AddItems(IEnumerable oldItems)
         {
-            oldItems.Cast<T>().ToList().ForEach(item =>
+            oldItems.Cast<T>().Each(item =>
                 {
                     AttachPropertyChanged(item);
                     IndexDictionary.Values.ToList().ForEach(index =>

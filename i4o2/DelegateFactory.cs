@@ -16,34 +16,33 @@ namespace i4o2
          * http://kohari.org/2009/03/06/fast-late-bound-invocation-with-expression-trees/
          */
 
-        internal delegate object LateBoundMethod(object target, object[] arguments);
+        internal delegate object LateBoundProperty(object target);
 
         internal static class DelegateFactory
         {
-            public static LateBoundMethod Create(MethodInfo method)
+            public static LateBoundProperty Create<T>(PropertyInfo property)
             {
-                var instanceParameter = Expression.Parameter(typeof(object), "target");
-                var argumentsParameter = Expression.Parameter(typeof(object[]), "arguments");
+                if (property == null)
+                    throw new ArgumentNullException("property");
 
-                var call = Expression.Call(
-                    Expression.Convert(instanceParameter, method.DeclaringType),
-                    method,
-                    CreateParameterExpressions(method, argumentsParameter));
+                var method = typeof(T).GetMethod("get_" + property.Name, Type.EmptyTypes);
 
-                var lambda = Expression.Lambda<LateBoundMethod>(
-                    Expression.Convert(call, typeof(object)),
-                    instanceParameter,
-                    argumentsParameter);
-
-                return lambda.Compile();
+                return Create(method);
             }
 
-            private static Expression[] CreateParameterExpressions(MethodInfo method, Expression argumentsParameter)
+            private static LateBoundProperty Create(MethodInfo method)
             {
-                return method.GetParameters().Select((parameter, index) =>
-                    Expression.Convert(
-                        Expression.ArrayIndex(argumentsParameter, Expression.Constant(index)),
-                        parameter.ParameterType)).ToArray();
+                ParameterExpression instanceParameter = Expression.Parameter(typeof(object), "target");
+
+                MethodCallExpression call = Expression.Call(
+                    Expression.Convert(instanceParameter, method.DeclaringType),
+                    method);
+
+                Expression<LateBoundProperty> lambda = Expression.Lambda<LateBoundProperty>(
+                    Expression.Convert(call, typeof(object)),
+                    instanceParameter);
+
+                return lambda.Compile();
             }
         }
     }

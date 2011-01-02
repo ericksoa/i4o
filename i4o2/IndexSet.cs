@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
+using i4o2.i4o;
 
 namespace i4o2
 {
@@ -21,7 +22,7 @@ namespace i4o2
 
         protected void SetupIndices(IEnumerable<T> source)
         {
-            IndexSpecification.IndexedProperties.ToList().ForEach( 
+            IndexSpecification.IndexedProperties.Each( 
                 propName =>
                   IndexDictionary.Add(propName, IndexBuilder.GetIndexFor(source, typeof (T).GetProperty(propName)))
             );

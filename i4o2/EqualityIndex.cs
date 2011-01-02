@@ -4,20 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using i4o2.i4o;
 
 namespace i4o2
 {
     public class EqualityIndex<TChild> : IIndex<TChild>
     {
-        private readonly Dictionary<int,List<TChild>> _index = new Dictionary<int, List<TChild>>();
-        private readonly PropertyInfo _property;
-        
+        private readonly Dictionary<int, List<TChild>> _index = new Dictionary<int, List<TChild>>();
+        private readonly PropertyReader<TChild> _propertyReader;
+
         public EqualityIndex(
-            IEnumerable<TChild> collectionToIndex, 
+            IEnumerable<TChild> collectionToIndex,
             PropertyInfo property)
         {
-            _property = property;
-            collectionToIndex.ToList().ForEach(Add);
+            _propertyReader = new PropertyReader<TChild>(property.Name);
+            collectionToIndex.Each(Add);
         }
 
         public IEnumerator<TChild> GetEnumerator()
@@ -31,13 +32,13 @@ namespace i4o2
         }
 
         public void Add(TChild item)
-        {            
-            var propValue = _property.GetValue(item,null).GetHashCode();
+        {
+            int propValue = _propertyReader.GetItemHashCode(item);
 
             if (_index.ContainsKey(propValue))
                 _index[propValue].Add(item);
             else
-                _index.Add(propValue, new List<TChild> {item});
+                _index.Add(propValue, new List<TChild> { item });
         }
 
         public void Clear()
@@ -47,7 +48,7 @@ namespace i4o2
 
         public bool Contains(TChild item)
         {
-            var propValue = _property.GetValue(item, null).GetHashCode();
+            int propValue = _propertyReader.GetItemHashCode(item);
             return _index.ContainsKey(propValue) && _index[propValue].Contains(item);
         }
 
@@ -59,7 +60,7 @@ namespace i4o2
 
         public bool Remove(TChild item)
         {
-            var propValue = _property.GetValue(item, null).GetHashCode();
+            int propValue = _propertyReader.GetItemHashCode(item);
             return _index.ContainsKey(propValue) && _index[propValue].Remove(item);
         }
 
@@ -73,14 +74,9 @@ namespace i4o2
             get { return false; }
         }
 
-        public string PropertyName
-        {
-            get { return _property.Name; }
-        }
-
         public IEnumerable<TChild> WhereThroughIndex(Expression<Func<TChild, bool>> predicate)
         {
-            if (!(predicate.Body is BinaryExpression)) 
+            if (!(predicate.Body is BinaryExpression))
                 throw new NotSupportedException();
             var equalityExpression = predicate.Body as BinaryExpression;
             if (equalityExpression.NodeType != ExpressionType.Equal)
