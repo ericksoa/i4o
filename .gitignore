@@ -3,13 +3,7 @@
 [Rr]elease/
 *.suo
 _ReSharper.*/
-src/**/*.xap
 TestResult.xml
 *.sln.cache
 *.VisualState.xml
 *.csproj.user
-src/build/*
-temp_build*.ps1
-ClientBin/
-bin/
-*.swp
