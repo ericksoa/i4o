@@ -45,51 +45,142 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="c5\arrays\ArrayList.cs" />
-    <Compile Include="c5\arrays\CircularQueue.cs" />
-    <Compile Include="c5\arrays\HashedArrayList.cs" />
-    <Compile Include="c5\arrays\SortedArray.cs" />
-    <Compile Include="c5\Attributes.cs" />
-    <Compile Include="c5\Builtin.cs" />
-    <Compile Include="c5\Collections.cs" />
-    <Compile Include="c5\Comparer.cs" />
-    <Compile Include="c5\Delegates.cs" />
-    <Compile Include="c5\Dictionaries.cs" />
-    <Compile Include="c5\Enums.cs" />
-    <Compile Include="c5\Events.cs" />
-    <Compile Include="c5\Exceptions.cs" />
-    <Compile Include="c5\Formatting.cs" />
-    <Compile Include="c5\Hashers.cs" />
-    <Compile Include="c5\hashing\HashBag.cs" />
-    <Compile Include="c5\hashing\HashDictionary.cs" />
-    <Compile Include="c5\hashing\HashTable.cs" />
-    <Compile Include="c5\heaps\IntervalHeap.cs" />
-    <Compile Include="c5\Interfaces.cs" />
-    <Compile Include="c5\linkedlists\HashedLinkedList.cs" />
-    <Compile Include="c5\linkedlists\LinkedList.cs" />
-    <Compile Include="c5\MappedEnumerators.cs" />
-    <Compile Include="c5\Random.cs" />
-    <Compile Include="c5\Records.cs" />
-    <Compile Include="c5\Sorting.cs" />
-    <Compile Include="c5\trees\RedBlackTreeBag.cs" />
-    <Compile Include="c5\trees\RedBlackTreeDictionary.cs" />
-    <Compile Include="c5\trees\RedBlackTreeSet.cs" />
-    <Compile Include="c5\ViewSupport.cs" />
-    <Compile Include="c5\WrappedArray.cs" />
-    <Compile Include="c5\Wrappers.cs" />
-    <Compile Include="ComparisonIndex.cs" />
-    <Compile Include="DelegateFactory.cs" />
-    <Compile Include="EqualityIndex.cs" />
-    <Compile Include="ExtensionHelpers.cs" />
-    <Compile Include="IIndex.cs" />
-    <Compile Include="IndexBuilder.cs" />
-    <Compile Include="IndexLookupFailedException.cs" />
-    <Compile Include="IndexSet.cs" />
-    <Compile Include="IndexSetExtensions.cs" />
-    <Compile Include="ObservingIndexSet.cs" />
-    <Compile Include="IndexSpecification.cs" />
+    <Compile Include="..\i4o.Silverlight\c5\arrays\ArrayList.cs">
+      <Link>c5\arrays\ArrayList.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\arrays\CircularQueue.cs">
+      <Link>c5\arrays\CircularQueue.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\arrays\HashedArrayList.cs">
+      <Link>c5\arrays\HashedArrayList.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\arrays\SortedArray.cs">
+      <Link>c5\arrays\SortedArray.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\Attributes.cs">
+      <Link>c5\Attributes.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\Builtin.cs">
+      <Link>c5\Builtin.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\Collections.cs">
+      <Link>c5\Collections.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\Comparer.cs">
+      <Link>c5\Comparer.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\Delegates.cs">
+      <Link>c5\Delegates.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\Dictionaries.cs">
+      <Link>c5\Dictionaries.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\Enums.cs">
+      <Link>c5\Enums.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\Events.cs">
+      <Link>c5\Events.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\Exceptions.cs">
+      <Link>c5\Exceptions.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\Formatting.cs">
+      <Link>c5\Formatting.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\Hashers.cs">
+      <Link>c5\Hashers.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\hashing\HashBag.cs">
+      <Link>c5\hashing\HashBag.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\hashing\HashDictionary.cs">
+      <Link>c5\hashing\HashDictionary.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\hashing\HashTable.cs">
+      <Link>c5\hashing\HashTable.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\heaps\IntervalHeap.cs">
+      <Link>c5\heaps\IntervalHeap.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\Interfaces.cs">
+      <Link>c5\Interfaces.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\linkedlists\HashedLinkedList.cs">
+      <Link>c5\linkedlists\HashedLinkedList.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\linkedlists\LinkedList.cs">
+      <Link>c5\linkedlists\LinkedList.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\MappedEnumerators.cs">
+      <Link>c5\MappedEnumerators.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\Random.cs">
+      <Link>c5\Random.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\Records.cs">
+      <Link>c5\Records.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\Sorting.cs">
+      <Link>c5\Sorting.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\trees\RedBlackTreeBag.cs">
+      <Link>c5\trees\RedBlackTreeBag.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\trees\RedBlackTreeDictionary.cs">
+      <Link>c5\trees\RedBlackTreeDictionary.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\trees\RedBlackTreeSet.cs">
+      <Link>c5\trees\RedBlackTreeSet.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\ViewSupport.cs">
+      <Link>c5\ViewSupport.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\WrappedArray.cs">
+      <Link>c5\WrappedArray.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\c5\Wrappers.cs">
+      <Link>c5\Wrappers.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\ComparisonIndex.cs">
+      <Link>ComparisonIndex.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\DelegateFactory.cs">
+      <Link>DelegateFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\EqualityIndex.cs">
+      <Link>EqualityIndex.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\ExtensionHelpers.cs">
+      <Link>ExtensionHelpers.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\Extensions.cs">
+      <Link>Extensions.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\IIndex.cs">
+      <Link>IIndex.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\IndexBuilder.cs">
+      <Link>IndexBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\IndexLookupFailedException.cs">
+      <Link>IndexLookupFailedException.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\IndexSet.cs">
+      <Link>IndexSet.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\IndexSetExtensions.cs">
+      <Link>IndexSetExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\IndexSpecification.cs">
+      <Link>IndexSpecification.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\ObservingIndexSet.cs">
+      <Link>ObservingIndexSet.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight\PropertyReader.cs">
+      <Link>PropertyReader.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyReader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

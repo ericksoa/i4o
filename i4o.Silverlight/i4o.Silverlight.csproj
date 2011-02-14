@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{92E48593-F727-4AC6-867C-A89DA79EC79F}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>i4o.Silverlight</RootNamespace>
+    <AssemblyName>i4o.Silverlight</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="c5\arrays\ArrayList.cs" />
+    <Compile Include="c5\arrays\CircularQueue.cs" />
+    <Compile Include="c5\arrays\HashedArrayList.cs" />
+    <Compile Include="c5\arrays\SortedArray.cs" />
+    <Compile Include="c5\Attributes.cs" />
+    <Compile Include="c5\Builtin.cs" />
+    <Compile Include="c5\Collections.cs" />
+    <Compile Include="c5\Comparer.cs" />
+    <Compile Include="c5\Delegates.cs" />
+    <Compile Include="c5\Dictionaries.cs" />
+    <Compile Include="c5\Enums.cs" />
+    <Compile Include="c5\Events.cs" />
+    <Compile Include="c5\Exceptions.cs" />
+    <Compile Include="c5\Formatting.cs" />
+    <Compile Include="c5\Hashers.cs" />
+    <Compile Include="c5\hashing\HashBag.cs" />
+    <Compile Include="c5\hashing\HashDictionary.cs" />
+    <Compile Include="c5\hashing\HashTable.cs" />
+    <Compile Include="c5\heaps\IntervalHeap.cs" />
+    <Compile Include="c5\Interfaces.cs" />
+    <Compile Include="c5\linkedlists\HashedLinkedList.cs" />
+    <Compile Include="c5\linkedlists\LinkedList.cs" />
+    <Compile Include="c5\MappedEnumerators.cs" />
+    <Compile Include="c5\Random.cs" />
+    <Compile Include="c5\Records.cs" />
+    <Compile Include="c5\Sorting.cs" />
+    <Compile Include="c5\trees\RedBlackTreeBag.cs" />
+    <Compile Include="c5\trees\RedBlackTreeDictionary.cs" />
+    <Compile Include="c5\trees\RedBlackTreeSet.cs" />
+    <Compile Include="c5\ViewSupport.cs" />
+    <Compile Include="c5\WrappedArray.cs" />
+    <Compile Include="c5\Wrappers.cs" />
+    <Compile Include="ComparisonIndex.cs" />
+    <Compile Include="DelegateFactory.cs" />
+    <Compile Include="EqualityIndex.cs" />
+    <Compile Include="ExtensionHelpers.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="IIndex.cs" />
+    <Compile Include="IndexBuilder.cs" />
+    <Compile Include="IndexLookupFailedException.cs" />
+    <Compile Include="IndexSet.cs" />
+    <Compile Include="IndexSetExtensions.cs" />
+    <Compile Include="IndexSpecification.cs" />
+    <Compile Include="ObservingIndexSet.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyReader.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

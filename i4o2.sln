@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "i4o2", "i4o2\i4o2.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "i4o2.Tests", "i4o2.Tests\i4o2.Tests.csproj", "{1B3D03CE-E906-4AFB-B8C2-1F9AC7114FBB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "i4o.Silverlight", "i4o.Silverlight\i4o.Silverlight.csproj", "{92E48593-F727-4AC6-867C-A89DA79EC79F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "i4o.Silverlight.Tests", "i4o.Silverlight.Tests\i4o.Silverlight.Tests.csproj", "{75049B07-1138-4FAA-A97B-F3D5A2E46FFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +23,14 @@ Global
 		{1B3D03CE-E906-4AFB-B8C2-1F9AC7114FBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B3D03CE-E906-4AFB-B8C2-1F9AC7114FBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B3D03CE-E906-4AFB-B8C2-1F9AC7114FBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92E48593-F727-4AC6-867C-A89DA79EC79F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92E48593-F727-4AC6-867C-A89DA79EC79F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92E48593-F727-4AC6-867C-A89DA79EC79F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92E48593-F727-4AC6-867C-A89DA79EC79F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75049B07-1138-4FAA-A97B-F3D5A2E46FFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75049B07-1138-4FAA-A97B-F3D5A2E46FFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75049B07-1138-4FAA-A97B-F3D5A2E46FFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75049B07-1138-4FAA-A97B-F3D5A2E46FFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
