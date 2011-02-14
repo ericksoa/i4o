@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
-using i4o2.i4o;
+using i4o.i4o;
 
-namespace i4o2
+namespace i4o
 {
     public class IndexSet<T> : IEnumerable<T>
     {

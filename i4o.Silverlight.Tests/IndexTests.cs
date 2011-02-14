@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using NUnit.Framework;
 
-namespace i4o2.Tests
+namespace i4o.Tests
 {
     public class ObservableObject : INotifyPropertyChanged
     {

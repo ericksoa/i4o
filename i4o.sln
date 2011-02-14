@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "i4o2", "i4o2\i4o2.csproj", "{9A3BD7C7-F8EE-4312-AD67-EF0BD133CB20}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "i4o", "i4o\i4o.csproj", "{9A3BD7C7-F8EE-4312-AD67-EF0BD133CB20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "i4o2.Tests", "i4o2.Tests\i4o2.Tests.csproj", "{1B3D03CE-E906-4AFB-B8C2-1F9AC7114FBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "i4o.Tests", "i4o.Tests\i4o.Tests.csproj", "{1B3D03CE-E906-4AFB-B8C2-1F9AC7114FBB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "i4o.Silverlight", "i4o.Silverlight\i4o.Silverlight.csproj", "{92E48593-F727-4AC6-867C-A89DA79EC79F}"
 EndProject

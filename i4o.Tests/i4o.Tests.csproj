@@ -55,7 +55,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\i4o2\i4o2.csproj">
+    <ProjectReference Include="..\i4o\i4o.csproj">
       <Project>{9A3BD7C7-F8EE-4312-AD67-EF0BD133CB20}</Project>
       <Name>i4o2</Name>
     </ProjectReference>

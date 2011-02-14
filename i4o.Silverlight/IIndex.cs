@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace i4o2
+namespace i4o
 {    
     public interface IIndex<TChild> : ICollection<TChild>
     {

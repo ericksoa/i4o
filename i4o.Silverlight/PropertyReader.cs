@@ -1,8 +1,8 @@
 using System;
 using System.Reflection;
-using i4o2.i4o;
+using i4o.i4o;
 
-namespace i4o2
+namespace i4o
 {
     public enum PropertyReadStrategy
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Collections.ObjectModel;
 
-namespace i4o2
+namespace i4o
 {
     public static class IndexBuilder
     {

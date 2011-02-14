@@ -5,9 +5,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using C5;
-using i4o2.i4o;
 
-namespace i4o2
+namespace i4o
 {
     public class ComparisonIndex<TChild, TProperty> : IIndex<TChild>
         where TProperty : IComparable

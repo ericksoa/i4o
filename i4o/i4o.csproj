@@ -8,8 +8,8 @@
     <ProjectGuid>{9A3BD7C7-F8EE-4312-AD67-EF0BD133CB20}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>i4o2</RootNamespace>
-    <AssemblyName>i4o2</AssemblyName>
+    <RootNamespace>i4o</RootNamespace>
+    <AssemblyName>i4o</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
@@ -177,10 +177,15 @@
     <Compile Include="..\i4o.Silverlight\ObservingIndexSet.cs">
       <Link>ObservingIndexSet.cs</Link>
     </Compile>
+    <Compile Include="..\i4o.Silverlight\Properties\AssemblyInfo.cs">
+      <Link>AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="..\i4o.Silverlight\PropertyReader.cs">
       <Link>PropertyReader.cs</Link>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

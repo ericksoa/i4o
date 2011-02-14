@@ -3,9 +3,9 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using i4o2.i4o;
+using i4o.i4o;
 
-namespace i4o2
+namespace i4o
 {
     public class ObservingIndexSet<T> : IndexSet<T> where T : INotifyPropertyChanged
     {
