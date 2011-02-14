@@ -41,7 +41,7 @@ namespace i4o
         {
             return (IIndex<TChild>) 
                    Activator.CreateInstance(
-                       Type.GetType("i4o2.ComparisonIndex`2").MakeGenericType(new[] {typeof (TChild), propertyInfo.PropertyType}),
+                       Type.GetType("i4o.ComparisonIndex`2").MakeGenericType(new[] {typeof (TChild), propertyInfo.PropertyType}),
                        new object[] { enumerable, propertyInfo }
                        );
         }
