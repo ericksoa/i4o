@@ -76,9 +76,9 @@ namespace i4o
 
         public IEnumerable<TChild> WhereThroughIndex(Expression<Func<TChild, bool>> predicate)
         {
-            if (!(predicate.Body is BinaryExpression))
-                throw new NotSupportedException();
             var equalityExpression = predicate.Body as BinaryExpression;
+            if (equalityExpression == null)
+                throw new NotSupportedException();
             if (equalityExpression.NodeType != ExpressionType.Equal)
                 throw new NotImplementedException("Equality Indexes do not work with non equality binary expressions");
             var rightSide = Expression.Lambda(equalityExpression.Right);
