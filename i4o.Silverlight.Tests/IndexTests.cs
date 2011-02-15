@@ -68,7 +68,7 @@ namespace i4o.Tests
             public Color FavoriteColor { get; set; }
          }
 
-        public int ResolvesToZero() {
+        public static int ResolvesToZero() {
             return 2 - 2; }
 
         [Test]
@@ -290,6 +290,27 @@ namespace i4o.Tests
         {
             return _value;
         }
+    }
+
+    public class IssuesTests
+    {
+        [Test]
+        public void ISSUE_19925_EquatableIndexLookupWithComplexRightConditionResolvesWithMultipleItems()
+        {
+            IndexTests.SimpleClass[] someItems = {
+                                new IndexTests.SimpleClass {Name = "Jason", Age = 25},
+                                new IndexTests.SimpleClass {Name = "Jason", Age = 25},
+                                new IndexTests.SimpleClass {Name = "Jason", Age = 25},
+                                new IndexTests.SimpleClass {Name = "Aaron", Age = 37}
+                            };
+            var indexOnSomeItems =
+                new EqualityIndex<IndexTests.SimpleClass>(
+                    someItems,
+                    typeof(IndexTests.SimpleClass).GetProperty("Age"));
+            var jasons = indexOnSomeItems.WhereThroughIndex(item => item.Age == (someItems[0].Age + IndexTests.ResolvesToZero()));
+            Assert.AreEqual(3, jasons.Count());
+        }
+
     }
 
 }

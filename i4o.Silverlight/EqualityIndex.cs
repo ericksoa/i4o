@@ -84,10 +84,11 @@ namespace i4o
             var rightSide = Expression.Lambda(equalityExpression.Right);
             var valueToCheck = rightSide.Compile().DynamicInvoke(null).GetHashCode();
             if (_index.ContainsKey(valueToCheck))
-                foreach (var item in _index[valueToCheck])
+                foreach (var item in _index[valueToCheck].Where(predicate.Compile()))
                 {
-                    var matchingFromBucket = _index[valueToCheck].Where(predicate.Compile());
-                    foreach (var bucketItem in matchingFromBucket) yield return bucketItem;
+                    yield return item;
+                    //var matchingFromBucket = _index[valueToCheck].Where(predicate.Compile());
+                    //foreach (var bucketItem in matchingFromBucket) yield return bucketItem;
                 }
             else
                 yield break;
