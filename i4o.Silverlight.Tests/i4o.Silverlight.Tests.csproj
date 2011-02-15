@@ -100,8 +100,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CollectionModificationTests.cs" />
     <Compile Include="IndexTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyReaderTests.cs" />
+    <Compile Include="TestingHelpers\FluentSpecificationExtensions.cs" />
+    <Compile Include="TestingHelpers\Stopwatch.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

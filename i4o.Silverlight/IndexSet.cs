@@ -10,8 +10,14 @@ namespace i4o
     public class IndexSet<T> : IEnumerable<T>
     {
         protected readonly IndexSpecification<T> IndexSpecification;
-        protected readonly Dictionary<string, IIndex<T>> IndexDictionary 
+        protected readonly Dictionary<string, IIndex<T>> IndexDictionary
             = new Dictionary<string, IIndex<T>>();
+
+        public IndexSet(IndexSpecification<T> indexSpecification)
+            : this(new List<T>(), indexSpecification)
+        {
+
+        }
 
         public IndexSet(IEnumerable<T> source, IndexSpecification<T> indexSpecification)
         {
@@ -21,9 +27,9 @@ namespace i4o
 
         protected void SetupIndices(IEnumerable<T> source)
         {
-            IndexSpecification.IndexedProperties.Each( 
+            IndexSpecification.IndexedProperties.Each(
                 propName =>
-                  IndexDictionary.Add(propName, IndexBuilder.GetIndexFor(source, typeof (T).GetProperty(propName)))
+                  IndexDictionary.Add(propName, IndexBuilder.GetIndexFor(source, typeof(T).GetProperty(propName)))
             );
         }
 
@@ -39,15 +45,15 @@ namespace i4o
             return GetEnumerator();
         }
 
-        internal IEnumerable<T> WhereUsingIndex(Expression<Func<T,bool>> predicate)
+        internal IEnumerable<T> WhereUsingIndex(Expression<Func<T, bool>> predicate)
         {
             if (
-                BodyIsBinary(predicate) && 
+                BodyIsBinary(predicate) &&
                 BodyTypeIsEqual(predicate) &&
                 LeftSideIsMemberExpression(predicate) &&
                 LeftSideMemberIsIndexed(predicate)
                )
-               return IndexDictionary[LeftSide(predicate).Member.Name].WhereThroughIndex(predicate);
+                return IndexDictionary[LeftSide(predicate).Member.Name].WhereThroughIndex(predicate);
             return IndexDictionary.First().Value.Where(predicate.Compile());
         }
 

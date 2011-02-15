@@ -8,8 +8,8 @@
     <ProjectGuid>{1B3D03CE-E906-4AFB-B8C2-1F9AC7114FBB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>i4o2.Tests</RootNamespace>
-    <AssemblyName>i4o2.Tests</AssemblyName>
+    <RootNamespace>i4o.Tests</RootNamespace>
+    <AssemblyName>i4o.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
@@ -49,8 +49,17 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\i4o.Silverlight.Tests\CollectionModificationTests.cs">
+      <Link>CollectionModificationTests.cs</Link>
+    </Compile>
     <Compile Include="..\i4o.Silverlight.Tests\IndexTests.cs">
       <Link>IndexTests.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight.Tests\PropertyReaderTests.cs">
+      <Link>PropertyReaderTests.cs</Link>
+    </Compile>
+    <Compile Include="..\i4o.Silverlight.Tests\TestingHelpers\FluentSpecificationExtensions.cs">
+      <Link>TestHelpers\FluentSpecificationExtensions.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
