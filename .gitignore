@@ -7,3 +7,5 @@ TestResult.xml
 *.sln.cache
 *.VisualState.xml
 *.csproj.user
+*.sqp
+*~
